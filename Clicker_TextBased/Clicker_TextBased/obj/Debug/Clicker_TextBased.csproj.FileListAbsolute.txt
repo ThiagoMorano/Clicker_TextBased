@@ -1,0 +1,12 @@
+C:\Users\Thiago\Projects\CGL\GP3\Clicker_TextBased\Clicker_TextBased\bin\Debug\Clicker_TextBased.exe.config
+C:\Users\Thiago\Projects\CGL\GP3\Clicker_TextBased\Clicker_TextBased\bin\Debug\Clicker_TextBased.exe
+C:\Users\Thiago\Projects\CGL\GP3\Clicker_TextBased\Clicker_TextBased\bin\Debug\Clicker_TextBased.pdb
+C:\Users\Thiago\Projects\CGL\GP3\Clicker_TextBased\Clicker_TextBased\obj\Debug\Clicker_TextBased.csprojAssemblyReference.cache
+C:\Users\Thiago\Projects\CGL\GP3\Clicker_TextBased\Clicker_TextBased\obj\Debug\Clicker_TextBased.exe
+C:\Users\Thiago\Projects\CGL\GP3\Clicker_TextBased\Clicker_TextBased\obj\Debug\Clicker_TextBased.pdb
+C:\Users\Thiago\OneDrive - smail.th-koeln.de\Projects\CGL\GP3\Clicker_TextBased\Clicker_TextBased\Clicker_TextBased\bin\Debug\Clicker_TextBased.exe.config
+C:\Users\Thiago\OneDrive - smail.th-koeln.de\Projects\CGL\GP3\Clicker_TextBased\Clicker_TextBased\Clicker_TextBased\bin\Debug\Clicker_TextBased.exe
+C:\Users\Thiago\OneDrive - smail.th-koeln.de\Projects\CGL\GP3\Clicker_TextBased\Clicker_TextBased\Clicker_TextBased\bin\Debug\Clicker_TextBased.pdb
+C:\Users\Thiago\OneDrive - smail.th-koeln.de\Projects\CGL\GP3\Clicker_TextBased\Clicker_TextBased\Clicker_TextBased\obj\Debug\Clicker_TextBased.csprojAssemblyReference.cache
+C:\Users\Thiago\OneDrive - smail.th-koeln.de\Projects\CGL\GP3\Clicker_TextBased\Clicker_TextBased\Clicker_TextBased\obj\Debug\Clicker_TextBased.exe
+C:\Users\Thiago\OneDrive - smail.th-koeln.de\Projects\CGL\GP3\Clicker_TextBased\Clicker_TextBased\Clicker_TextBased\obj\Debug\Clicker_TextBased.pdb
