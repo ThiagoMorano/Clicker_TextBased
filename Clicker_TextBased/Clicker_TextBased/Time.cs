@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Clicker_TextBased
 {
-    static class Time
+    public static class Time
     {
         private static long _ticksSinceLastCycle = 0;
         private static long _ticksSinceLastFrame = 0;

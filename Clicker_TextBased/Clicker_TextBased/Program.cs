@@ -16,11 +16,13 @@ namespace Clicker_TextBased
             player.Init();
 
             Item item0 = new Item();
+            Item item1 = new Item();
+            Graph graph = new Graph();
+            graph.AddNode(item0);
 
             player.Update();
 
-            Console.WriteLine("Press Space to generate     |     Press A to purchase\n");
-            Console.WriteLine("Currency: " + player.CurrentCurrencyValue.ToString("f3"));
+            Console.WriteLine("Press Space to generate");
 
             Console.CursorVisible = false;
 
@@ -59,7 +61,8 @@ namespace Clicker_TextBased
                                 player.Click();
                                 break;
                             case ConsoleKey.A:
-                                player.AttemptToPurchase(item0);
+                                if (graph.IsElementAvailableForPurchase(item0))
+                                    player.AttemptToPurchase(item0);
                                 break;
                             case ConsoleKey.Escape:
                                 exit = true;
@@ -67,10 +70,12 @@ namespace Clicker_TextBased
                         }
                     }
 
-                    Console.SetCursorPosition(0, Console.CursorTop - 1);
-
                     player.Update();
-                    Console.WriteLine("Currency: " + player.CurrentCurrencyValue.ToString("f3"));
+                    Graphics.Draw(0, 1, "Currency: " + player.CurrentCurrencyValue.ToString("f3"));
+                    long countItems = player.CountItemsOfType(item0);
+                    if (graph.IsElementAvailableForPurchase(item0))
+                        Graphics.Draw(0, 3, "Press A to purchase Item0");
+                    Graphics.Draw(0, 4, "Item0 : " + countItems.ToString() + " producing " + (countItems * (double)item0.ItemGainPerSecond).ToString("f1"));
 
                     Time.UpdateSinceLastFrame();
                     timeUntilNextFrame = 0.0d;

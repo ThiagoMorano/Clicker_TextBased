@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Clicker_TextBased
 {
-    class Player
+    public class Player
     {
         double _currentCurrencyValue;
         double _valueGeneratedByClick;
@@ -40,7 +40,7 @@ namespace Clicker_TextBased
         {
             foreach (Item item in _inventory.Keys)
             {
-                _currentCurrencyValue += item.ItemGainPerSecond * _inventory[item] * elapsedTime;
+                _currentCurrencyValue += item.ItemGainPerSecond * (double)_inventory[item] * elapsedTime;
             }
         }
 
@@ -72,6 +72,14 @@ namespace Clicker_TextBased
             {
                 _inventory.Add(item, 1);
             }
+        }
+
+        public long CountItemsOfType(Item item)
+        {
+            if (_inventory.ContainsKey(item))
+                return _inventory[item];
+            else
+                return 0;
         }
     }
 }

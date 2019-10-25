@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Clicker_TextBased
 {
-    class Item
+    public class Element
+    {
+
+    }
+
+    public class Item : Element
     {
         double _itemGainPerSecond;
         double _cost;
