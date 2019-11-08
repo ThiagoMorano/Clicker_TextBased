@@ -8,21 +8,21 @@ namespace Clicker_TextBased
 {
     public class Element
     {
+        protected double _cost;
 
+        public double Cost { get { return _cost; } }
     }
 
     public class Item : Element
     {
         double _itemGainPerSecond;
-        double _cost;
-        //        string _graphics;
 
         public double ItemGainPerSecond { get { return _itemGainPerSecond; } }
-        public double Cost { get { return _cost; } }
+
 
         public Item()
         {
-            _itemGainPerSecond = 0.2d;
+            _itemGainPerSecond = 0.1d;
             _cost = 1.0d;
         }
 
@@ -30,6 +30,48 @@ namespace Clicker_TextBased
         {
             _cost = costToPurchase;
             _itemGainPerSecond = gainPerSecond;
+        }
+    }
+
+    public class Upgrade : Element
+    {
+
+        Dictionary<Item, float> _influencedItems;
+        public bool HasBeenPurchased { get; set; } = false;
+
+        public Dictionary<Item, float> InfluencedItems { get { return _influencedItems; } }
+
+
+        public Upgrade(double costToPurchase = 0.0d)
+        {
+            _cost = costToPurchase;
+            _influencedItems = new Dictionary<Item, float>();
+        }
+
+        public Upgrade(double costToPurchase, Item item, float multiplier)
+        {
+            _cost = costToPurchase;
+
+            _influencedItems = new Dictionary<Item, float>();
+            _influencedItems.Add(item, multiplier);
+        }
+
+
+        public void AddInfluencedItem(Item item, float multiplier)
+        {
+            _influencedItems.Add(item, multiplier);
+        }
+        public void AddInfluencedItem(Item[] items, float[] multipliers)
+        {
+            if (items.Length == multipliers.Length)
+            {
+                for (int i = 0; i < items.Length; i++)
+                {
+                    _influencedItems.Add(items[i], multipliers[i]);
+                }
+            }
+            else
+                throw (new ArgumentOutOfRangeException("Expected same amount of items and multipliers"));
         }
     }
 }
