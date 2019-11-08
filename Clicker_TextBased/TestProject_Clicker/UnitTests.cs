@@ -129,6 +129,47 @@ namespace TestProject_Clicker
 
             Assert.IsFalse(graph.GetNodeThatContainsElement(item0).GetOutboundEdgeToElement(item1).Condition.ConditionMet);
         }
+
+        [TestMethod]
+        public void VerifyCondition_MultipleConditionsPartiallyMet()
+        {
+            Graph graph = new Graph();
+            Item preconditionalItem0 = new Item(1.0d, 1.0d);
+            Item preconditionalItem1 = new Item(1.0d, 1.0d);
+            Item blockedItem = new Item(1.0d, 1.0d);
+            graph.AddNode(preconditionalItem0);
+            graph.AddNode(preconditionalItem1);
+            graph.AddNode(blockedItem);
+            long itemsRequiredByConditions = 1;
+            graph.AddEdgeFromToElement(preconditionalItem0, blockedItem, itemsRequiredByConditions);
+            graph.AddEdgeFromToElement(preconditionalItem1, blockedItem, itemsRequiredByConditions);
+
+            long currentAmountOfItems = 1;
+            graph.VerifyConditionsRelatedToItem(preconditionalItem0, currentAmountOfItems);
+
+            Assert.IsFalse(graph.IsElementAvailableForPurchase(blockedItem));
+        }
+
+        [TestMethod]
+        public void VerifyCondition_MultipleConditionsShouldBeMet()
+        {
+            Graph graph = new Graph();
+            Item preconditionalItem0 = new Item(1.0d, 1.0d);
+            Item preconditionalItem1 = new Item(1.0d, 1.0d);
+            Item blockedItem = new Item(1.0d, 1.0d);
+            graph.AddNode(preconditionalItem0);
+            graph.AddNode(preconditionalItem1);
+            graph.AddNode(blockedItem);
+            long itemsRequiredByConditions = 1;
+            graph.AddEdgeFromToElement(preconditionalItem0, blockedItem, itemsRequiredByConditions);
+            graph.AddEdgeFromToElement(preconditionalItem1, blockedItem, itemsRequiredByConditions);
+
+            long currentAmountOfItems = 1;
+            graph.VerifyConditionsRelatedToItem(preconditionalItem0, currentAmountOfItems);
+            graph.VerifyConditionsRelatedToItem(preconditionalItem1, currentAmountOfItems);
+
+            Assert.IsTrue(graph.IsElementAvailableForPurchase(blockedItem));
+        }
     }
 
     [TestClass]
