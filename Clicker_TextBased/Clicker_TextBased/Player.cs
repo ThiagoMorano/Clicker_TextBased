@@ -11,6 +11,7 @@ namespace Clicker_TextBased
         double _currentCurrencyValue;
         double _valueGeneratedByClick;
         Dictionary<Item, long> _inventory;
+        Dictionary<Item, float> _itemGainMultiplier;
 
         public double CurrentCurrencyValue { get { return _currentCurrencyValue; } }
         public double ValueGeneratedByClick { get { return _valueGeneratedByClick; } }
@@ -21,11 +22,13 @@ namespace Clicker_TextBased
             _currentCurrencyValue = 0;
             _valueGeneratedByClick = 0.1d;
             _inventory = new Dictionary<Item, long>();
+            _itemGainMultiplier = new Dictionary<Item, float>();
         }
         public Player(double valueGeneratedByClicking)
         {
             _valueGeneratedByClick = valueGeneratedByClicking;
             _inventory = new Dictionary<Item, long>();
+            _itemGainMultiplier = new Dictionary<Item, float>();
         }
 
 
@@ -47,31 +50,47 @@ namespace Clicker_TextBased
         {
             foreach (Item item in _inventory.Keys)
             {
-                _currentCurrencyValue += item.ItemGainPerSecond * (double)_inventory[item] * elapsedTime;
+                _currentCurrencyValue += GetValueGeneratedByItem(item) * elapsedTime;
+            }
+        }
+
+        public double GetValueGeneratedByItem(Item item)
+        {
+            if (_inventory.ContainsKey(item))
+            {
+                return _inventory[item] * item.ItemGainPerSecond * _itemGainMultiplier[item];
+            }
+            else
+            {
+                return 0.0d;
+                //throw (new KeyNotFoundException("Player doesn't have item given as parameter"));
             }
         }
 
         /// <summary>
-        /// Purchase the item if player has enough currency 
+        /// Purchase the element if player has enough currency 
         /// </summary>
-        /// <param name="item"></param>
-        public bool AttemptToPurchase(Item item)
+        /// <param name="element"></param>
+        public bool AttemptToPurchase(Element element)
         {
-            if (item.Cost < CurrentCurrencyValue || Math.Abs(CurrentCurrencyValue - item.Cost) < 0.05)
+            if (element.Cost < CurrentCurrencyValue || Math.Abs(CurrentCurrencyValue - element.Cost) < 0.05)
             {
-                Purchase(item);
+                Purchase(element);
                 return true;
             }
             return false;
         }
 
-        private void Purchase(Item item)
+        private void Purchase(Element element)
         {
-            _currentCurrencyValue -= item.Cost;
-            AddIntoInventory(item);
+            _currentCurrencyValue -= element.Cost;
+            if (element is Item)
+                AddItemIntoInventory(element as Item);
+            else if (element is Upgrade)
+                AddMultiplier(element as Upgrade);
         }
 
-        private void AddIntoInventory(Item item)
+        private void AddItemIntoInventory(Item item)
         {
             if (_inventory.ContainsKey(item))
             {
@@ -80,9 +99,28 @@ namespace Clicker_TextBased
             else
             {
                 _inventory.Add(item, 1);
+                if (!_itemGainMultiplier.ContainsKey(item))
+                    _itemGainMultiplier.Add(item, 1);
             }
         }
 
+        private void AddMultiplier(Upgrade upgrade)
+        {
+            foreach (Item item in upgrade.InfluencedItems.Keys)
+            {
+                if (!_itemGainMultiplier.ContainsKey(item))
+                    _itemGainMultiplier.Add(item, upgrade.InfluencedItems[item]);
+                else
+                    _itemGainMultiplier[item] *= upgrade.InfluencedItems[item];
+            }
+            upgrade.HasBeenPurchased = true;
+        }
+
+        /// <summary>
+        /// Returns amount of item in player's inventory
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public long CountItemsOfType(Item item)
         {
             if (_inventory.ContainsKey(item))

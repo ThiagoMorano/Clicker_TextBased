@@ -54,7 +54,7 @@ namespace Clicker_TextBased
         }
 
         /// <summary>
-        /// Adds an edge from node with startElemento to node with endElement.
+        /// Adds an edge from node with startElement to node with endElement.
         /// </summary>
         /// <param name="startElement"></param>
         /// <param name="endElement"></param>

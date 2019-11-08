@@ -21,6 +21,9 @@ namespace Clicker_TextBased
             graph.AddNode(item1);
             graph.AddEdgeFromToElement(item0, item1, 5);
 
+            Upgrade upgrade0 = new Upgrade(1.0d, item0, 2.0f);
+            graph.AddNode(upgrade0);
+
 
             player.Update();
 
@@ -28,7 +31,7 @@ namespace Clicker_TextBased
 
             Console.CursorVisible = false;
 
-            const double FPS = 30;
+            const double FPS = 24;
             bool exit = false;
             double timeUntilNextFrame = 0.0d;
             Time.Init();
@@ -75,6 +78,12 @@ namespace Clicker_TextBased
                                     if (player.AttemptToPurchase(item1))
                                         graph.VerifyConditionsRelatedToItem(item1, player.CountItemsOfType(item1));
                                 break;
+                            case ConsoleKey.X:
+                                if (graph.IsElementAvailableForPurchase(upgrade0))
+                                    if (!upgrade0.HasBeenPurchased)
+                                        if (player.AttemptToPurchase(upgrade0))
+                                            graph.VerifyConditionsRelatedToItem(upgrade0, 1);
+                                break;
                             case ConsoleKey.Escape:
                                 exit = true;
                                 break;
@@ -86,12 +95,18 @@ namespace Clicker_TextBased
                     if (graph.IsElementAvailableForPurchase(item0))
                     {
                         Graphics.Draw(0, 3, "Press A to purchase Item0 for " + item0.Cost.ToString());
-                        Graphics.Draw(0, 4, "Item0 : " + player.CountItemsOfType(item0).ToString() + " producing " + (player.CountItemsOfType(item0) * (double)item0.ItemGainPerSecond).ToString("f1"));
+                        Graphics.Draw(0, 4, "Item0 : " + player.CountItemsOfType(item0).ToString() + " producing " + player.GetValueGeneratedByItem(item0).ToString("f1"));
                     }
                     if (graph.IsElementAvailableForPurchase(item1))
                     {
-                        Graphics.Draw(0, 7, "Press S to purchase Item1 for " + item1.Cost.ToString());
-                        Graphics.Draw(0, 8, "Item1 : " + player.CountItemsOfType(item1).ToString() + " producing " + (player.CountItemsOfType(item1) * (double)item1.ItemGainPerSecond).ToString("f1"));
+                        Graphics.Draw(0, 6, "Press S to purchase Item1 for " + item1.Cost.ToString());
+                        Graphics.Draw(0, 7, "Item1 : " + player.CountItemsOfType(item1).ToString() + " producing " + player.GetValueGeneratedByItem(item0).ToString("f1"));
+                    }
+                    if (graph.IsElementAvailableForPurchase(upgrade0))
+                    {
+                        Graphics.Draw(0, 9, "Press X to purchase Upgrade0 for " + upgrade0.Cost.ToString());
+                        if (upgrade0.HasBeenPurchased)
+                            Graphics.Draw(40, 9, "[PURCHASED]");
                     }
 
 
@@ -100,7 +115,7 @@ namespace Clicker_TextBased
                 }
             }
 
-            Graphics.Draw(40, 25, "Presse any key to exit...");
+            Graphics.Draw(40, 25, "Press any key to exit...");
             Console.ReadKey();
         }
     }

@@ -151,7 +151,7 @@ namespace TestProject_Clicker
         }
 
         [TestMethod]
-        public void VerifyCondition_MultipleConditionsShouldBeMet()
+        public void VerifyCondition_MultipleConditionsShouldBeFulfilled()
         {
             Graph graph = new Graph();
             Item preconditionalItem0 = new Item(1.0d, 1.0d);
@@ -179,10 +179,8 @@ namespace TestProject_Clicker
         [TestMethod]
         public void Item_DefaultConstructor_ItemExists()
         {
-            //Arrange
             Item item = new Item();
 
-            //Assert
             Assert.IsNotNull(item);
         }
 
@@ -287,6 +285,122 @@ namespace TestProject_Clicker
             //player.Update(1.0d);   NEED TO MOCK
         }
 
+        [TestMethod]
+        public void Player_AttemptToPurchase_PurchasesUpgrade()
+        {
+            Upgrade upgrade = new Upgrade();
+            Player player = new Player();
+
+            Assert.IsTrue(player.AttemptToPurchase(upgrade));
+        }
+
+        [TestMethod]
+        public void Player_GetValueGeneratedByItem_CorrectValue()
+        {
+            double valueOfClick = 1.0d;
+            Player player = new Player(valueOfClick);
+            double valueGeneratedByItem = 1.0d;
+            Item item0 = new Item(1.0d, valueGeneratedByItem);
+
+            player.Click();
+            player.AttemptToPurchase(item0);
+
+            Assert.AreEqual(valueGeneratedByItem, player.GetValueGeneratedByItem(item0));
+        }
+
+        [TestMethod]
+        public void Player_GetValueGeneratedByItem_ItemNotFoundReturns0()
+        {
+            Player player = new Player();
+
+            Assert.AreEqual(0.0d, player.GetValueGeneratedByItem(new Item()));
+        }
+
+        [TestMethod]
+        public void Player_GetValueGeneratedByItem_ProperlyCountsUpgrade()
+        {
+            double valueOfClick = 2.0d;
+            Player player = new Player(valueOfClick);
+            Item item = new Item(1.0d, 1.0d);
+            float multiplier = 2.0f;
+            Upgrade upgrade = new Upgrade(1.0d, item, multiplier);
+
+            player.Click();
+            player.AttemptToPurchase(item);
+            player.AttemptToPurchase(upgrade);
+
+            Assert.AreEqual(item.ItemGainPerSecond * multiplier, player.GetValueGeneratedByItem(item));
+        }
+    }
+
+    [TestClass]
+    public class Upgrade_Tests
+    {
+        [TestMethod]
+        public void Upgrade_Constructor_ItemExists()
+        {
+            Upgrade upgrade = new Upgrade();
+
+            Assert.IsNotNull(upgrade);
+        }
+
+        [TestMethod]
+        public void Upgrade_Constructor_CostParameter()
+        {
+            double costOfItem = 1.0d;
+            Upgrade upgrade = new Upgrade(costOfItem);
+
+            Assert.AreEqual(costOfItem, upgrade.Cost);
+        }
+
+        [TestMethod]
+        public void Upgrade_Constructor_SingleItem()
+        {
+            Item item = new Item();
+            Upgrade upgrade = new Upgrade(1.0d, item, 1.0f);
+
+            Assert.AreEqual(1.0f, upgrade.InfluencedItems[item]);
+        }
+
+        [TestMethod]
+        public void Upgrade_AddInfluencedItem_SingleItem()
+        {
+            Item item = new Item();
+            Upgrade upgrade = new Upgrade();
+
+            upgrade.AddInfluencedItem(item, 1.0f);
+
+            Assert.AreEqual(1.0f, upgrade.InfluencedItems[item]);
+        }
+
+        [TestMethod]
+        public void Upgrade_AddInfluencedItem_ListOfItems()
+        {
+            Item item0 = new Item();
+            Item item1 = new Item();
+            Item item2 = new Item();
+            Upgrade upgrade = new Upgrade(1.0d);
+
+            Item[] items = { item0, item1, item2 };
+            float[] multipliers = { 0.0f, 1.0f, 2.0f };
+            upgrade.AddInfluencedItem(items, multipliers);
+
+            Assert.AreEqual(0.0f, upgrade.InfluencedItems[item0]);
+            Assert.AreEqual(1.0f, upgrade.InfluencedItems[item1]);
+            Assert.AreEqual(2.0f, upgrade.InfluencedItems[item2]);
+        }
+
+        [TestMethod]
+        public void Upgrade_HasBeenPurchased_SetToTrueAfterPlayerPurchase()
+        {
+            Player player = new Player(1.0d);
+            Upgrade upgrade = new Upgrade(1.0d, new Item(), 1.0f);
+
+            player.Click();
+            player.AttemptToPurchase(upgrade);
+
+            Assert.IsTrue(upgrade.HasBeenPurchased);
+        }
     }
 
     [TestClass]
