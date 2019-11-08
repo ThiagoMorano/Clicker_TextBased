@@ -15,7 +15,7 @@ namespace Clicker_TextBased
     {
         double _itemGainPerSecond;
         double _cost;
-//        string _graphics;
+        //        string _graphics;
 
         public double ItemGainPerSecond { get { return _itemGainPerSecond; } }
         public double Cost { get { return _cost; } }
@@ -24,6 +24,12 @@ namespace Clicker_TextBased
         {
             _itemGainPerSecond = 0.2d;
             _cost = 1.0d;
+        }
+
+        public Item(double costToPurchase, double gainPerSecond)
+        {
+            _cost = costToPurchase;
+            _itemGainPerSecond = gainPerSecond;
         }
     }
 }
