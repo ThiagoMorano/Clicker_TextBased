@@ -13,14 +13,21 @@ namespace Clicker_TextBased
         Dictionary<Item, long> _inventory;
 
         public double CurrentCurrencyValue { get { return _currentCurrencyValue; } }
+        public double ValueGeneratedByClick { get { return _valueGeneratedByClick; } }
 
 
-        public void Init()
+        public Player()
         {
             _currentCurrencyValue = 0;
-            _valueGeneratedByClick = 0.2d;
+            _valueGeneratedByClick = 0.1d;
             _inventory = new Dictionary<Item, long>();
         }
+        public Player(double valueGeneratedByClicking)
+        {
+            _valueGeneratedByClick = valueGeneratedByClicking;
+            _inventory = new Dictionary<Item, long>();
+        }
+
 
         public void Update()
         {
@@ -48,12 +55,14 @@ namespace Clicker_TextBased
         /// Purchase the item if player has enough currency 
         /// </summary>
         /// <param name="item"></param>
-        public void AttemptToPurchase(Item item)
+        public bool AttemptToPurchase(Item item)
         {
-            if (item.Cost <= CurrentCurrencyValue)
+            if (item.Cost < CurrentCurrencyValue || Math.Abs(CurrentCurrencyValue - item.Cost) < 0.05)
             {
                 Purchase(item);
+                return true;
             }
+            return false;
         }
 
         private void Purchase(Item item)

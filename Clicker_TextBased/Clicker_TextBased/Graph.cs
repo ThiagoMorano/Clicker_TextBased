@@ -18,7 +18,7 @@ namespace Clicker_TextBased
         }
 
         /// <summary>
-        /// Add a node that contains element
+        /// Add a node that contains an element
         /// </summary>
         /// <param name="element"></param>
         public void AddNode(Element element)
