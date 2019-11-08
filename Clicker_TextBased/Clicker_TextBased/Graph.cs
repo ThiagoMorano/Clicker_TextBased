@@ -82,7 +82,7 @@ namespace Clicker_TextBased
             {
                 foreach (Edge edge in _nodes[element].OutboundEdges)
                 {
-                    edge.VerifyIfConditionMet(amountOfItems);
+                    edge.VerifyConditionWasMet(amountOfItems);
                 }
             }
             else
@@ -157,12 +157,22 @@ namespace Clicker_TextBased
         }
 
         /// <summary>
-        /// Sets node as available for purchase
+        /// Verify if all inbound conditions have been fulfilled
         /// </summary>
-        internal void MakeNodeAvailableForPurchase()
+        internal void VerifyInboundConditions()
         {
-            AvailableForPurchase = true;
-            //Raise event about condition met
+            bool allConditionsWereMet = true;
+            foreach (Edge edge in _inboundEdges)
+            {
+                if (edge.Condition.ConditionMet == false)
+                {
+                    allConditionsWereMet = false;
+                }
+            }
+            if (allConditionsWereMet)
+            {
+                AvailableForPurchase = true;
+            }
         }
     }
 
@@ -186,13 +196,13 @@ namespace Clicker_TextBased
             Condition = new Condition(start.Element, amountRequired);
         }
 
-        internal void VerifyIfConditionMet(long amountOfItems)
+        internal void VerifyConditionWasMet(long amountOfItems)
         {
             if (!Condition.ConditionMet)
             {
                 if (Condition.RefreshConditionStatus(amountOfItems))
                 {
-                    EndNode.MakeNodeAvailableForPurchase();
+                    EndNode.VerifyInboundConditions();
                 }
             }
         }
