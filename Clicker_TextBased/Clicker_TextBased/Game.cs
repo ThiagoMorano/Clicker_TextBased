@@ -151,7 +151,7 @@ namespace Clicker_TextBased
                     Graphics.Draw(17, (i * 6) + 2, items[i].Cost.ToString() + " LoC");
                     Graphics.Draw(29, (i * 6) + 2, inputToPurchaseItems[i].ToString());
 
-                    Graphics.Draw(0, (i * 6) + 3, player.GetGainOfSingleItem(items[i]) + " LPS");
+                    Graphics.Draw(0, (i * 6) + 3, player.GetGainOfSingleItem(items[i]) + " LPS  ");
                     Graphics.Draw(17, (i * 6) + 3, "#" + player.CountItemsOfType(items[i]).ToString());
 
                     for (int j = 0; j < items[i].Description.Length; j++)
@@ -172,7 +172,7 @@ namespace Clicker_TextBased
                 {
                     Graphics.Draw(89, (i * 6) + 2 + linesOfInfluencedItems, upgrades[i].Name);
                     if (upgrades[i].HasBeenPurchased)
-                        Graphics.Draw(106, (i * 6) + 2 + linesOfInfluencedItems, "[PURCHASED]      ");
+                        Graphics.Draw(106, (i * 6) + 2 + linesOfInfluencedItems, "[PURCHASED]  ");
                     else
                     {
                         Graphics.Draw(106, (i * 6) + 2 + linesOfInfluencedItems, upgrades[i].Cost.ToString() + " LoC");
