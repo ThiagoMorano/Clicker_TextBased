@@ -20,8 +20,12 @@ namespace Clicker_TextBased
 
         Player player;
         Graph graph;
-        Item item0, item1, item2, item3;
-        Upgrade upgrade0, upgrade1, upgrade2;
+        Item[] items;
+        Upgrade[] upgrades;
+
+
+        ConsoleKey[] inputToPurchaseItems;
+        ConsoleKey[] inputToPurchaseUpgrades;
 
         public Game()
         {
@@ -46,17 +50,44 @@ namespace Clicker_TextBased
         public void Init()
         {
             player = new Player();
-
-            item0 = new Item();
+            items = new Item[6];
+            upgrades = new Upgrade[6];
             graph = new Graph();
-            graph.AddNode(item0);
 
-            item1 = new Item(5, 0.5d);
-            graph.AddNode(item1);
-            graph.AddEdgeFromToElement(item0, item1, 5);
+            inputToPurchaseItems = new[] { ConsoleKey.A, ConsoleKey.S, ConsoleKey.D, ConsoleKey.F, ConsoleKey.G, ConsoleKey.H };
 
-            upgrade0 = new Upgrade(1.0d, item0, 2.0f);
-            graph.AddNode(upgrade0);
+            string[] descriptionItem = { "Lorem ipsum dolor sit amet,", "consectetur adipiscing elit,", "sed do eiusmod tempor incididunt" };
+
+            items[0] = new Item(1.0d, 0.1d, "ItemName0", descriptionItem);
+            graph.AddNode(items[0]);
+
+            items[1] = new Item(5, 0.5d, "ItemName1", descriptionItem);
+            graph.AddNode(items[1]);
+            //graph.AddEdgeFromToElement(item0, item1, 5);
+
+            items[2] = new Item(10, 1d, "ItemName2", descriptionItem);
+            graph.AddNode(items[2]);
+
+            items[3] = new Item(15, 1.5d, "ItemName3", descriptionItem);
+            graph.AddNode(items[3]);
+
+            items[4] = new Item(15, 1.5d, "ItemName4", descriptionItem);
+            graph.AddNode(items[4]);
+
+            items[5] = new Item(15, 1.5d, "ItemName5", descriptionItem);
+            graph.AddNode(items[5]);
+
+            upgrades[0] = new Upgrade(1.0d, items[1], 2.0f);
+            graph.AddNode(upgrades[0]);
+
+            upgrades[1] = new Upgrade(1.0d, items[2], 2.0f);
+            graph.AddNode(upgrades[1]);
+
+            upgrades[2] = new Upgrade(1.0d, items[3], 2.0f);
+            graph.AddNode(upgrades[2]);
+
+            upgrades[3] = new Upgrade(1.0d, items[4], 2.0f);
+            graph.AddNode(upgrades[3]);
 
             //DrawHeadline();
         }
@@ -88,22 +119,22 @@ namespace Clicker_TextBased
                         SwitchCurrentInGameScreen();
                         break;
                     case ConsoleKey.A:
-                        if (graph.IsElementAvailableForPurchase(item0))
+                        if (graph.IsElementAvailableForPurchase(items[0]))
                         {
-                            if (player.AttemptToPurchase(item0))
-                                graph.VerifyConditionsRelatedToItem(item0, player.CountItemsOfType(item0));
+                            if (player.AttemptToPurchase(items[0]))
+                                graph.VerifyConditionsRelatedToItem(items[0], player.CountItemsOfType(items[0]));
                         }
                         break;
                     case ConsoleKey.S:
-                        if (graph.IsElementAvailableForPurchase(item1))
-                            if (player.AttemptToPurchase(item1))
-                                graph.VerifyConditionsRelatedToItem(item1, player.CountItemsOfType(item1));
+                        if (graph.IsElementAvailableForPurchase(items[1]))
+                            if (player.AttemptToPurchase(items[1]))
+                                graph.VerifyConditionsRelatedToItem(items[1], player.CountItemsOfType(items[1]));
                         break;
                     case ConsoleKey.X:
-                        if (graph.IsElementAvailableForPurchase(upgrade0))
-                            if (!upgrade0.HasBeenPurchased)
-                                if (player.AttemptToPurchase(upgrade0))
-                                    graph.VerifyConditionsRelatedToItem(upgrade0, 1);
+                        if (graph.IsElementAvailableForPurchase(upgrades[0]))
+                            if (!upgrades[0].HasBeenPurchased)
+                                if (player.AttemptToPurchase(upgrades[0]))
+                                    graph.VerifyConditionsRelatedToItem(upgrades[0], 1);
                         break;
                     case ConsoleKey.Escape:
                         exit = true;
@@ -132,49 +163,40 @@ namespace Clicker_TextBased
         private void DrawItemsScreen()
         {
             Graphics.Draw(10, 0, "Items");
-            if (graph.IsElementAvailableForPurchase(item0))
+            for (int i = 0; i < items.Length; i++)
             {
-                Graphics.Draw(0, 2, "ItemName0");
-                Graphics.Draw(17, 2, item0.Cost.ToString() + " LoC");
-                Graphics.Draw(29, 2, "A");
+                if (graph.IsElementAvailableForPurchase(items[i]))
+                {
+                    Graphics.Draw(0, (i * 6) + 2, items[i].Name);
+                    Graphics.Draw(17, (i * 6) + 2, items[i].Cost.ToString() + " LoC");
+                    Graphics.Draw(29, (i * 6) + 2, inputToPurchaseItems[i].ToString());
 
-                Graphics.Draw(0, 3, player.GetGainOfSingleItem(item0) + " LPS");
-                Graphics.Draw(17, 3, "#" + player.CountItemsOfType(item0).ToString());
+                    Graphics.Draw(0, (i * 6) + 3, player.GetGainOfSingleItem(items[i]) + " LPS");
+                    Graphics.Draw(17, (i * 6) + 3, "#" + player.CountItemsOfType(items[i]).ToString());
 
-                Graphics.Draw(0, 4, "Lorem ipsum dolor sit amet,");
-                Graphics.Draw(0, 5, "consectetur adipiscing elit,");
-                Graphics.Draw(0, 6, "sed do eiusmod tempor incididunt");
-            }
-            if (graph.IsElementAvailableForPurchase(item1))
-            {
-                Graphics.Draw(0, 8, "ItemName1");
-                Graphics.Draw(17, 8, item1.Cost.ToString() + " LoC");
-                Graphics.Draw(29, 8, "S");
-
-                Graphics.Draw(0, 9, player.GetGainOfSingleItem(item1) + " LPS");
-                Graphics.Draw(17, 9, "#" + player.CountItemsOfType(item1).ToString());
-
-                Graphics.Draw(0, 10, "Lorem ipsum dolor sit amet,");
-                Graphics.Draw(0, 11, "consectetur adipiscing elit,");
-                Graphics.Draw(0, 12, "sed do eiusmod tempor incididunt");
+                    for (int j = 0; j < items[i].Description.Length; j++)
+                    {
+                        Graphics.Draw(0, (i * 6) + 4 + j, items[i].Description[j]);
+                    }
+                }
             }
         }
 
         private void DrawUpgradesScreen()
         {
             Graphics.Draw(99, 0, "Upgrades");
-            if (graph.IsElementAvailableForPurchase(upgrade0))
+            if (graph.IsElementAvailableForPurchase(upgrades[0]))
             {
                 Graphics.Draw(89, 2, "UpgradeName0");
-                if (upgrade0.HasBeenPurchased)
+                if (upgrades[0].HasBeenPurchased)
                     Graphics.Draw(106, 2, "[PURCHASED]      ");
                 else
                 {
-                    Graphics.Draw(106, 2, item0.Cost.ToString() + " LoC");
+                    Graphics.Draw(106, 2, upgrades[0].Cost.ToString() + " LoC");
                     Graphics.Draw(118, 2, "X");
                 }
 
-                Graphics.Draw(89, 3, "ItemName0    x" + upgrade0.InfluencedItems[item0].ToString("f1"));
+                Graphics.Draw(89, 3, "ItemName1    x" + upgrades[0].InfluencedItems[items[1]].ToString("f1"));
 
                 Graphics.Draw(89, 4, "Lorem ipsum dolor sit amet,");
                 Graphics.Draw(89, 5, "consectetur adipiscing elit,");

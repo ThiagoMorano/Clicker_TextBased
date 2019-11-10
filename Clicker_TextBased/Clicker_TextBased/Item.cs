@@ -9,8 +9,12 @@ namespace Clicker_TextBased
     public class Element
     {
         protected double _cost;
+        protected string _name;
+        protected string[] _description;
 
         public double Cost { get { return _cost; } }
+        public string Name { get { return _name; } }
+        public string[] Description { get { return _description; } }
     }
 
     public class Item : Element
@@ -30,6 +34,14 @@ namespace Clicker_TextBased
         {
             _cost = costToPurchase;
             _itemGainPerSecond = gainPerSecond;
+        }
+
+        public Item(double costToPurchase, double gainPerSecond, string name, string[] description)
+        {
+            _cost = costToPurchase;
+            _itemGainPerSecond = gainPerSecond;
+            _name = name;
+            _description = description;
         }
     }
 
@@ -54,6 +66,17 @@ namespace Clicker_TextBased
 
             _influencedItems = new Dictionary<Item, float>();
             _influencedItems.Add(item, multiplier);
+        }
+
+        public Upgrade(double costToPurchase, Item item, float multiplier, string name, string[] description)
+        {
+            _cost = costToPurchase;
+
+            _influencedItems = new Dictionary<Item, float>();
+            _influencedItems.Add(item, multiplier);
+
+            _name = name;
+            _description = description;
         }
 
 
