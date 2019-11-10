@@ -13,5 +13,10 @@ namespace Clicker_TextBased
             Console.SetCursorPosition(x, y);
             Console.Write(graphics);
         }
+
+        public static void DrawAfter(string graphics)
+        {
+            Console.Write(graphics);
+        }
     }
 }

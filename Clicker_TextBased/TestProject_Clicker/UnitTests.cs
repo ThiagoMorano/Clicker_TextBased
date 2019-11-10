@@ -305,7 +305,7 @@ namespace TestProject_Clicker
             player.Click();
             player.AttemptToPurchase(item0);
 
-            Assert.AreEqual(valueGeneratedByItem, player.GetValueGeneratedByItem(item0));
+            Assert.AreEqual(valueGeneratedByItem, player.GetGainOfItemsOfTypeInInventory(item0));
         }
 
         [TestMethod]
@@ -313,7 +313,7 @@ namespace TestProject_Clicker
         {
             Player player = new Player();
 
-            Assert.AreEqual(0.0d, player.GetValueGeneratedByItem(new Item()));
+            Assert.AreEqual(0.0d, player.GetGainOfItemsOfTypeInInventory(new Item()));
         }
 
         [TestMethod]
@@ -329,7 +329,7 @@ namespace TestProject_Clicker
             player.AttemptToPurchase(item);
             player.AttemptToPurchase(upgrade);
 
-            Assert.AreEqual(item.ItemGainPerSecond * multiplier, player.GetValueGeneratedByItem(item));
+            Assert.AreEqual(item.ItemGainPerSecond * multiplier, player.GetGainOfItemsOfTypeInInventory(item));
         }
     }
 
@@ -402,6 +402,32 @@ namespace TestProject_Clicker
             Assert.IsTrue(upgrade.HasBeenPurchased);
         }
     }
+
+    [TestClass]
+    public class Game_Tests
+    {
+        [TestMethod]
+        public void Game_Constructor_DefaultScreenIsItem()
+        {
+            Game game = new Game();
+
+            Screen currentScreen = game.currentScreen;
+
+            Assert.AreEqual(Screen.items, currentScreen);
+        }
+
+        [TestMethod]
+        public void Game_SwitchCurrentScreenTo_ShouldSwitchProperly()
+        {
+            Game game = new Game();
+            Screen screen = Screen.upgrades;
+            
+            game.SwitchCurrentScreenTo(screen);
+
+            Assert.AreEqual(screen, game.currentScreen);
+        }
+    }
+
 
     [TestClass]
     public class Input_Tests

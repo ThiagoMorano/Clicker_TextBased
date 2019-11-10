@@ -31,15 +31,14 @@ namespace Clicker_TextBased
             _itemGainMultiplier = new Dictionary<Item, float>();
         }
 
+        public void Click()
+        {
+            _currentCurrencyValue += _valueGeneratedByClick;
+        }
 
         public void Update()
         {
             GenerateCurrencyFromItems(Time.DeltaTime);
-        }
-
-        public void Click()
-        {
-            _currentCurrencyValue += _valueGeneratedByClick;
         }
 
         /// <summary>
@@ -50,11 +49,11 @@ namespace Clicker_TextBased
         {
             foreach (Item item in _inventory.Keys)
             {
-                _currentCurrencyValue += GetValueGeneratedByItem(item) * elapsedTime;
+                _currentCurrencyValue += GetGainOfItemsOfTypeInInventory(item) * elapsedTime;
             }
         }
 
-        public double GetValueGeneratedByItem(Item item)
+        public double GetGainOfItemsOfTypeInInventory(Item item)
         {
             if (_inventory.ContainsKey(item))
             {
@@ -64,6 +63,19 @@ namespace Clicker_TextBased
             {
                 return 0.0d;
                 //throw (new KeyNotFoundException("Player doesn't have item given as parameter"));
+            }
+        }
+        
+
+        public double GetGainOfSingleItem(Item item)
+        {
+            if (_itemGainMultiplier.ContainsKey(item))
+            {
+                return item.ItemGainPerSecond * _itemGainMultiplier[item];
+            }
+            else
+            {
+                return item.ItemGainPerSecond;
             }
         }
 
