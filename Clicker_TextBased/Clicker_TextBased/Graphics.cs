@@ -10,7 +10,9 @@ namespace Clicker_TextBased
     {
         public static void Draw(int x, int y, string graphics)
         {
-            Console.SetCursorPosition(x, y);
+            int offsetX = 3;
+            int offsetY = 0;
+            Console.SetCursorPosition(x + offsetX, y + offsetY);
             Console.Write(graphics);
         }
 

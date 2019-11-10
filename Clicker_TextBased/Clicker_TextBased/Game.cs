@@ -58,7 +58,7 @@ namespace Clicker_TextBased
             upgrade0 = new Upgrade(1.0d, item0, 2.0f);
             graph.AddNode(upgrade0);
 
-            DrawHeadline();
+            //DrawHeadline();
         }
         public void Update()
         {
@@ -131,6 +131,7 @@ namespace Clicker_TextBased
 
         private void DrawItemsScreen()
         {
+            Graphics.Draw(10, 0, "Items");
             if (graph.IsElementAvailableForPurchase(item0))
             {
                 Graphics.Draw(0, 2, "ItemName0");
@@ -140,7 +141,9 @@ namespace Clicker_TextBased
                 Graphics.Draw(0, 3, player.GetGainOfSingleItem(item0) + " LPS");
                 Graphics.Draw(17, 3, "#" + player.CountItemsOfType(item0).ToString());
 
-                Graphics.Draw(0, 4, "Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit,\nsed do eiusmod tempor incididunt");
+                Graphics.Draw(0, 4, "Lorem ipsum dolor sit amet,");
+                Graphics.Draw(0, 5, "consectetur adipiscing elit,");
+                Graphics.Draw(0, 6, "sed do eiusmod tempor incididunt");
             }
             if (graph.IsElementAvailableForPurchase(item1))
             {
@@ -151,30 +154,31 @@ namespace Clicker_TextBased
                 Graphics.Draw(0, 9, player.GetGainOfSingleItem(item1) + " LPS");
                 Graphics.Draw(17, 9, "#" + player.CountItemsOfType(item1).ToString());
 
-                Graphics.Draw(0, 10, "Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit,\nsed do eiusmod tempor incididunt");
+                Graphics.Draw(0, 10, "Lorem ipsum dolor sit amet,");
+                Graphics.Draw(0, 11, "consectetur adipiscing elit,");
+                Graphics.Draw(0, 12, "sed do eiusmod tempor incididunt");
             }
         }
 
         private void DrawUpgradesScreen()
         {
+            Graphics.Draw(99, 0, "Upgrades");
             if (graph.IsElementAvailableForPurchase(upgrade0))
             {
-                //Graphics.Draw(89, 9, "Upgrade0 for " + upgrade0.Cost.ToString());
-
                 Graphics.Draw(89, 2, "UpgradeName0");
-
                 if (upgrade0.HasBeenPurchased)
-                    Graphics.Draw(106, 9, "[PURCHASED]");
+                    Graphics.Draw(106, 2, "[PURCHASED]      ");
                 else
                 {
                     Graphics.Draw(106, 2, item0.Cost.ToString() + " LoC");
                     Graphics.Draw(118, 2, "X");
                 }
 
-                Graphics.Draw(89, 3, player.GetGainOfSingleItem(item0) + " LPS");
-                Graphics.Draw(106, 3, "#" + player.CountItemsOfType(item0).ToString());
+                Graphics.Draw(89, 3, "ItemName0    x" + upgrade0.InfluencedItems[item0].ToString("f1"));
 
-                Graphics.Draw(89, 4, "Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit,\nsed do eiusmod tempor incididunt");
+                Graphics.Draw(89, 4, "Lorem ipsum dolor sit amet,");
+                Graphics.Draw(89, 5, "consectetur adipiscing elit,");
+                Graphics.Draw(89, 6, "sed do eiusmod tempor incididunt");
             }
         }
 

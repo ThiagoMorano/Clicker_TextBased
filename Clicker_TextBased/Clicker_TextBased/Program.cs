@@ -11,8 +11,8 @@ namespace Clicker_TextBased
     {
         static void Main(string[] args)
         {
-            Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
-
+            //Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
+            Console.SetWindowSize(128, 32);
             Game game = new Game();
             game.Init();
 
