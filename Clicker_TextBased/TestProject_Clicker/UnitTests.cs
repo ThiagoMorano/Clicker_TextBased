@@ -402,47 +402,4 @@ namespace TestProject_Clicker
             Assert.IsTrue(upgrade.HasBeenPurchased);
         }
     }
-
-    [TestClass]
-    public class Game_Tests
-    {
-        [TestMethod]
-        public void Game_Constructor_DefaultScreenIsItem()
-        {
-            Game game = new Game();
-
-            Screen currentScreen = game.currentScreen;
-
-            Assert.AreEqual(Screen.items, currentScreen);
-        }
-
-        [TestMethod]
-        public void Game_SwitchCurrentScreenTo_ShouldSwitchProperly()
-        {
-            Game game = new Game();
-            Screen screen = Screen.upgrades;
-            
-            game.SwitchCurrentScreenTo(screen);
-
-            Assert.AreEqual(screen, game.currentScreen);
-        }
-    }
-
-
-    [TestClass]
-    public class Input_Tests
-    {
-
-        String functionExample()
-        {
-            return "value";
-        }
-
-        [TestMethod]
-        public void Input_RegisterInput_ProperlyRegisters()
-        {
-
-            //Input.RegisterInput(ConsoleKey.A, () => functionExample);
-        }
-    }
 }

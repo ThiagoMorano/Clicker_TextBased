@@ -19,7 +19,6 @@ namespace Clicker_TextBased
             Console.CursorVisible = false;
 
             const double FPS = 24;
-            bool exit = false;
             double timeUntilNextFrame = 0.0d;
             Time.Init();
             while (!game.exit)
@@ -39,7 +38,7 @@ namespace Clicker_TextBased
                 }
             }
 
-            Graphics.Draw(40, 25, "Press any key to exit...");
+            Graphics.Draw(50, 25, "Press any key to exit...");
             Console.ReadKey();
         }
     }
