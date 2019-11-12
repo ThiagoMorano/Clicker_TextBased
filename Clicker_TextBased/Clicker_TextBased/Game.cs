@@ -36,7 +36,7 @@ namespace Clicker_TextBased
 
             string[] descriptionItem = { "Lorem ipsum dolor sit amet,", "consectetur adipiscing elit,", "sed do eiusmod tempor incididunt" };
 
-            string[] descriptionItem0 = { "Hack an arduino robot arm", "that types hacking code for you" };
+            string[] descriptionItem0 = { "Hack an arduino robot arm that", "types hacking code for you" };
             items[0] = new Item(1.0d, 0.1d, "Robot Arm", descriptionItem0);
             graph.AddNode(items[0]);
             //graph.AddEdgeFromToElement(item0, item1, 5);
@@ -59,20 +59,20 @@ namespace Clicker_TextBased
             items[4] = new Item(15, 1.5d, "ICE Breaker", descriptionItem4);
             graph.AddNode(items[4]);
 
-            string[] descriptionItem5 = { "\"Wintermute was hive mind, decision", " maker. Neuromancer was personality.", "Neuromancer was immortality\n" };
+            string[] descriptionItem5 = { "\"Wintermute was hive mind, decision", "maker. Neuromancer was personality.", "Neuromancer was immortality\n" };
             items[5] = new Item(15, 1.5d, "Allied AI", descriptionItem5);
             graph.AddNode(items[5]);
 
 
-            string[] descriptionUpgrade0 = { "Give keyboard gloves to your", "robot arms. It keeps them cozy and", "helps with typing" };
+            string[] descriptionUpgrade0 = { "Give keyboard gloves to your", "robot arms. It keeps them cozy", "and helps with typing" };
             upgrades[0] = new Upgrade(1.0d, items[1], 2.0f, "Keyboard Gloves", descriptionUpgrade0);
             graph.AddNode(upgrades[0]);
 
-            string[] descriptionUpgrade1 = { "Your trojan disguises itself", " as a pretty screensaver.", "People are more pron to leave it running" };
+            string[] descriptionUpgrade1 = { "Your trojan disguises itself as", "pretty screensavers. People are", "more prone to leave it running" };
             upgrades[1] = new Upgrade(1.0d, items[2], 2.0f, "Nice Screensaver", descriptionUpgrade1);
             graph.AddNode(upgrades[1]);
 
-            string[] descriptionUpgrade2 = { "Gain access to the Cyberspace.", "You and your allies are able to access", "its virtual physicality." };
+            string[] descriptionUpgrade2 = { "Gain access to the Cyberspace.", "You and your allies are able to", "access its virtual physicality." };
             upgrades[2] = new Upgrade(1.0d, items[3], 2.0f, "Enter the Matrix", descriptionUpgrade2);
             graph.AddNode(upgrades[2]);
             //graph.AddEdgeFromToElement(items[3], upgrades[2], 1);
@@ -80,7 +80,7 @@ namespace Clicker_TextBased
             //graph.AddEdgeFromToElement(upgrades[2], items[5], 1);
 
 
-            string[] descriptionUpgrade3 = { "Finish what you've started and", "hack the world!" };
+            string[] descriptionUpgrade3 = { "Finish what you've started and", "HACK THE WORLD!" };
             upgrades[3] = new Upgrade(1.0d, "Hack the World!", descriptionUpgrade3);
             graph.AddNode(upgrades[3]);
 
