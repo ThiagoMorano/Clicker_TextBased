@@ -6,11 +6,6 @@ using System.Threading.Tasks;
 
 namespace Clicker_TextBased
 {
-    public enum Screen
-    {
-        items = 0, upgrades = 1
-    }
-
     public class Game
     {
         public bool exit = false;
@@ -41,36 +36,59 @@ namespace Clicker_TextBased
 
             string[] descriptionItem = { "Lorem ipsum dolor sit amet,", "consectetur adipiscing elit,", "sed do eiusmod tempor incididunt" };
 
-            items[0] = new Item(1.0d, 0.1d, "ItemName0", descriptionItem);
+            string[] descriptionItem0 = { "Hack an arduino robot arm", "that types hacking code for you" };
+            items[0] = new Item(1.0d, 0.1d, "Robot Arm", descriptionItem0);
             graph.AddNode(items[0]);
-
-            items[1] = new Item(5, 0.5d, "ItemName1", descriptionItem);
-            graph.AddNode(items[1]);
             //graph.AddEdgeFromToElement(item0, item1, 5);
 
-            items[2] = new Item(10, 1d, "ItemName2", descriptionItem);
+
+            string[] descriptionItem1 = { "Leave a trojan process in", "a random PC that keeps hacking", "while it rests" };
+            items[1] = new Item(5, 0.5d, "Zombie PC", descriptionItem1);
+            graph.AddNode(items[1]);
+
+
+            string[] descriptionItem2 = { "Use a RX modulator to conduct", "a mainframe cell direct to hack", "your hacking back in time" };
+            items[2] = new Item(10, 1d, "Hack Time Loop", descriptionItem2);
             graph.AddNode(items[2]);
 
-            items[3] = new Item(15, 1.5d, "ItemName3", descriptionItem);
+            string[] descriptionItem3 = { "Give the Red Pill and recruit", "another hacker for you cause" };
+            items[3] = new Item(15, 1.5d, "The Red Pill", descriptionItem3);
             graph.AddNode(items[3]);
 
-            items[4] = new Item(15, 1.5d, "ItemName4", descriptionItem);
+            string[] descriptionItem4 = { "Create a hack that is able to", "cut through any known Intrusion", "Countermeasures Electronics" };
+            items[4] = new Item(15, 1.5d, "ICE Breaker", descriptionItem4);
             graph.AddNode(items[4]);
 
-            items[5] = new Item(15, 1.5d, "ItemName5", descriptionItem);
+            string[] descriptionItem5 = { "\"Wintermute was hive mind, decision", " maker. Neuromancer was personality.", "Neuromancer was immortality\n" };
+            items[5] = new Item(15, 1.5d, "Allied AI", descriptionItem5);
             graph.AddNode(items[5]);
 
-            upgrades[0] = new Upgrade(1.0d, items[1], 2.0f, "Upgrade0", descriptionItem);
+
+            string[] descriptionUpgrade0 = { "Give keyboard gloves to your", "robot arms. It keeps them cozy and", "helps with typing" };
+            upgrades[0] = new Upgrade(1.0d, items[1], 2.0f, "Keyboard Gloves", descriptionUpgrade0);
             graph.AddNode(upgrades[0]);
 
-            upgrades[1] = new Upgrade(1.0d, items[2], 2.0f, "Upgrade1", descriptionItem);
+            string[] descriptionUpgrade1 = { "Your trojan disguises itself", " as a pretty screensaver.", "People are more pron to leave it running" };
+            upgrades[1] = new Upgrade(1.0d, items[2], 2.0f, "Nice Screensaver", descriptionUpgrade1);
             graph.AddNode(upgrades[1]);
 
-            upgrades[2] = new Upgrade(1.0d, items[3], 2.0f, "Upgrade2", descriptionItem);
+            string[] descriptionUpgrade2 = { "Gain access to the Cyberspace.", "You and your allies are able to access", "its virtual physicality." };
+            upgrades[2] = new Upgrade(1.0d, items[3], 2.0f, "Enter the Matrix", descriptionUpgrade2);
             graph.AddNode(upgrades[2]);
+            //graph.AddEdgeFromToElement(items[3], upgrades[2], 1);
+            //graph.AddEdgeFromToElement(upgrades[2], items[4], 1);
+            //graph.AddEdgeFromToElement(upgrades[2], items[5], 1);
 
-            upgrades[3] = new Upgrade(1.0d, items[4], 2.0f, "Upgrade3", descriptionItem);
+
+            string[] descriptionUpgrade3 = { "Finish what you've started and", "hack the world!" };
+            upgrades[3] = new Upgrade(1.0d, "Hack the World!", descriptionUpgrade3);
             graph.AddNode(upgrades[3]);
+
+
+
+
+            //graph.AddEdgeFromToElement(upgrades[2], upgrades[3], 1);
+
         }
 
         public void Update()

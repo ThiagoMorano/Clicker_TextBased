@@ -79,6 +79,15 @@ namespace Clicker_TextBased
             _description = description;
         }
 
+        public Upgrade(double costToPurchase, string name, string[] description)
+        {
+            _cost = costToPurchase;
+
+            _influencedItems = new Dictionary<Item, float>();
+
+            _name = name;
+            _description = description;
+        }
 
         public void AddInfluencedItem(Item item, float multiplier)
         {
