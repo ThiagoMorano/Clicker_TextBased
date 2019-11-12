@@ -23,7 +23,7 @@ namespace Clicker_TextBased
             Console.ReadKey(true);
 
             Console.Clear();
-    
+
 
             Game game = new Game();
             game.Init();
@@ -40,7 +40,8 @@ namespace Clicker_TextBased
                 {
                     game.Update();
 
-                    game.Draw();
+                    if (!game.win)
+                        game.Draw();
 
 
                     Time.UpdateSinceLastFrame();
@@ -48,7 +49,7 @@ namespace Clicker_TextBased
                 }
             }
 
-            Graphics.Draw(50, 25, "Press any key to exit...");
+            Graphics.Draw(89, 35, "Press any key to exit...");
             Console.ReadKey();
         }
     }

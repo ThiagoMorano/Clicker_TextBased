@@ -9,6 +9,7 @@ namespace Clicker_TextBased
     public class Game
     {
         public bool exit = false;
+        public bool win = false;
 
         Player player;
         Graph graph;
@@ -25,6 +26,7 @@ namespace Clicker_TextBased
         public Game()
         {
             exit = false;
+            win = false;
         }
 
 
@@ -226,8 +228,21 @@ namespace Clicker_TextBased
                 if (graph.IsElementAvailableForPurchase(upgrades[3]))
                     if (!upgrades[0].HasBeenPurchased)
                         if (player.AttemptToPurchase(upgrades[3]))
+                        {
                             graph.VerifyConditionsRelatedToItem(upgrades[3], 1);
+                            WinConditionReached();
+                        }
+
+
             }
+        }
+
+        void WinConditionReached()
+        {
+            win = true;
+            exit = true;
+            Console.Clear();
+            Graphics.Draw(49, 10, "YoU HaVe hAcKeD tHe WoRlD!");
         }
 
         public void Draw()
@@ -236,7 +251,7 @@ namespace Clicker_TextBased
             DrawUpgrades();
 
 
-            Graphics.Draw(49, 10, player.CurrentCurrencyValue.ToString("f3"));
+            Graphics.Draw(49, 10, player.CurrentCurrencyValue.ToString("f1"));
             Graphics.Draw(49, 11, "Lines of ~hacking~ Code");
         }
 
