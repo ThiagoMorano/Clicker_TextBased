@@ -53,6 +53,16 @@ namespace Clicker_TextBased
             }
         }
 
+        /// <summary>
+        /// Method added for the presentation
+        /// Adds specific amount of currency, just to allow all elements to be shown during the demo
+        /// </summary>
+        /// <param name="amountOfCurrency"></param>
+        public void DEMO_AddCurrency(double amountOfCurrency)
+        {
+            _currentCurrencyValue += amountOfCurrency;
+        }
+
         public double GetGainOfItemsOfTypeInInventory(Item item)
         {
             if (_inventory.ContainsKey(item))
@@ -65,7 +75,7 @@ namespace Clicker_TextBased
                 //throw (new KeyNotFoundException("Player doesn't have item given as parameter"));
             }
         }
-        
+
 
         public double GetGainOfSingleItem(Item item)
         {

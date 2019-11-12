@@ -15,8 +15,12 @@ namespace Clicker_TextBased
         Item[] items;
         Upgrade[] upgrades;
 
+        ConsoleKey inputClick;
+        ConsoleKey inputExit;
+        ConsoleKey DEMO_inputGenerateCurrency;
         ConsoleKey[] inputToPurchaseItems;
         ConsoleKey[] inputToPurchaseUpgrades;
+
 
         public Game()
         {
@@ -31,21 +35,20 @@ namespace Clicker_TextBased
             upgrades = new Upgrade[4];
             graph = new Graph();
 
-            inputToPurchaseItems = new[] { ConsoleKey.A, ConsoleKey.S, ConsoleKey.D, ConsoleKey.F, ConsoleKey.G, ConsoleKey.H };
-            inputToPurchaseUpgrades = new[] { ConsoleKey.X, ConsoleKey.C, ConsoleKey.V, ConsoleKey.B };
+            inputClick = ConsoleKey.Spacebar;
+            inputExit = ConsoleKey.Escape;
+            DEMO_inputGenerateCurrency = ConsoleKey.D1;
+            inputToPurchaseItems = new[] { ConsoleKey.Z, ConsoleKey.X, ConsoleKey.C, ConsoleKey.V, ConsoleKey.B, ConsoleKey.N };
+            inputToPurchaseUpgrades = new[] { ConsoleKey.P, ConsoleKey.O, ConsoleKey.I, ConsoleKey.U };
 
-            string[] descriptionItem = { "Lorem ipsum dolor sit amet,", "consectetur adipiscing elit,", "sed do eiusmod tempor incididunt" };
-
+            //Initialize items
             string[] descriptionItem0 = { "Hack an arduino robot arm that", "types hacking code for you" };
             items[0] = new Item(1.0d, 0.1d, "Robot Arm", descriptionItem0);
             graph.AddNode(items[0]);
-            //graph.AddEdgeFromToElement(item0, item1, 5);
-
 
             string[] descriptionItem1 = { "Leave a trojan process in", "a random PC that keeps hacking", "while it rests" };
             items[1] = new Item(5, 0.5d, "Zombie PC", descriptionItem1);
             graph.AddNode(items[1]);
-
 
             string[] descriptionItem2 = { "Use a RX modulator to conduct", "a mainframe cell direct to hack", "your hacking back in time" };
             items[2] = new Item(10, 1d, "Hack Time Loop", descriptionItem2);
@@ -63,7 +66,7 @@ namespace Clicker_TextBased
             items[5] = new Item(15, 1.5d, "Allied AI", descriptionItem5);
             graph.AddNode(items[5]);
 
-
+            // Initialize upgrades
             string[] descriptionUpgrade0 = { "Give keyboard gloves to your", "robot arms. It keeps them cozy", "and helps with typing" };
             upgrades[0] = new Upgrade(1.0d, items[1], 2.0f, "Keyboard Gloves", descriptionUpgrade0);
             graph.AddNode(upgrades[0]);
@@ -75,17 +78,16 @@ namespace Clicker_TextBased
             string[] descriptionUpgrade2 = { "Gain access to the Cyberspace.", "You and your allies are able to", "access its virtual physicality." };
             upgrades[2] = new Upgrade(1.0d, items[3], 2.0f, "Enter the Matrix", descriptionUpgrade2);
             graph.AddNode(upgrades[2]);
-            //graph.AddEdgeFromToElement(items[3], upgrades[2], 1);
-            //graph.AddEdgeFromToElement(upgrades[2], items[4], 1);
-            //graph.AddEdgeFromToElement(upgrades[2], items[5], 1);
-
 
             string[] descriptionUpgrade3 = { "Finish what you've started and", "HACK THE WORLD!" };
             upgrades[3] = new Upgrade(1.0d, "Hack the World!", descriptionUpgrade3);
             graph.AddNode(upgrades[3]);
 
 
-
+            //Initialize dependencies
+            //graph.AddEdgeFromToElement(items[3], upgrades[2], 1);
+            //graph.AddEdgeFromToElement(upgrades[2], items[4], 1);
+            //graph.AddEdgeFromToElement(upgrades[2], items[5], 1);
 
             //graph.AddEdgeFromToElement(upgrades[2], upgrades[3], 1);
 
@@ -93,7 +95,6 @@ namespace Clicker_TextBased
 
         public void Update()
         {
-
             CheckInput();
 
             player.Update();
@@ -101,7 +102,7 @@ namespace Clicker_TextBased
 
         void CheckInput()
         {
-            ConsoleKey inputReceived = ConsoleKey.Z; //Initialized with any value (non-nullable type)
+            ConsoleKey inputReceived = ConsoleKey.PageUp; //Initialized with any value (non-nullable type)
             bool inputWasRead = false;
             while (Console.KeyAvailable) //Reads first key in buffer and flushes the rest
             {
@@ -118,33 +119,109 @@ namespace Clicker_TextBased
 
             if (inputWasRead)
             {
-                switch (inputReceived)
+                CheckForSystemInput(inputReceived);
+                CheckForItemInput(inputReceived);
+                CheckForUpgradeInput(inputReceived);
+            }
+        }
+
+        void CheckForSystemInput(ConsoleKey inputReceived)
+        {
+            if (inputReceived == inputExit)
+            {
+                exit = true;
+            }
+            else if (inputReceived == inputClick)
+            {
+                player.Click();
+            }
+            else if (inputReceived == DEMO_inputGenerateCurrency)
+            {
+                player.DEMO_AddCurrency(1000d);
+            }
+        }
+
+        void CheckForItemInput(ConsoleKey inputReceived)
+        {
+            if (inputReceived == inputToPurchaseItems[0])
+            {
+                if (graph.IsElementAvailableForPurchase(items[0]))
                 {
-                    case ConsoleKey.Spacebar:
-                        player.Click();
-                        break;
-                    case ConsoleKey.A:
-                        if (graph.IsElementAvailableForPurchase(items[0]))
-                        {
-                            if (player.AttemptToPurchase(items[0]))
-                                graph.VerifyConditionsRelatedToItem(items[0], player.CountItemsOfType(items[0]));
-                        }
-                        break;
-                    case ConsoleKey.S:
-                        if (graph.IsElementAvailableForPurchase(items[1]))
-                            if (player.AttemptToPurchase(items[1]))
-                                graph.VerifyConditionsRelatedToItem(items[1], player.CountItemsOfType(items[1]));
-                        break;
-                    case ConsoleKey.X:
-                        if (graph.IsElementAvailableForPurchase(upgrades[0]))
-                            if (!upgrades[0].HasBeenPurchased)
-                                if (player.AttemptToPurchase(upgrades[0]))
-                                    graph.VerifyConditionsRelatedToItem(upgrades[0], 1);
-                        break;
-                    case ConsoleKey.Escape:
-                        exit = true;
-                        break;
+                    if (player.AttemptToPurchase(items[0]))
+                        graph.VerifyConditionsRelatedToItem(items[0], player.CountItemsOfType(items[0]));
                 }
+            }
+            else if (inputReceived == inputToPurchaseItems[1])
+            {
+                if (graph.IsElementAvailableForPurchase(items[1]))
+                {
+                    if (player.AttemptToPurchase(items[1]))
+                        graph.VerifyConditionsRelatedToItem(items[1], player.CountItemsOfType(items[1]));
+                }
+            }
+            else if (inputReceived == inputToPurchaseItems[2])
+            {
+                if (graph.IsElementAvailableForPurchase(items[2]))
+                {
+                    if (player.AttemptToPurchase(items[2]))
+                        graph.VerifyConditionsRelatedToItem(items[2], player.CountItemsOfType(items[2]));
+                }
+            }
+            else if (inputReceived == inputToPurchaseItems[3])
+            {
+                if (graph.IsElementAvailableForPurchase(items[3]))
+                {
+                    if (player.AttemptToPurchase(items[3]))
+                        graph.VerifyConditionsRelatedToItem(items[3], player.CountItemsOfType(items[3]));
+                }
+            }
+            else if (inputReceived == inputToPurchaseItems[4])
+            {
+                if (graph.IsElementAvailableForPurchase(items[4]))
+                {
+                    if (player.AttemptToPurchase(items[4]))
+                        graph.VerifyConditionsRelatedToItem(items[4], player.CountItemsOfType(items[4]));
+                }
+            }
+            else if (inputReceived == inputToPurchaseItems[5])
+            {
+                if (graph.IsElementAvailableForPurchase(items[5]))
+                {
+                    if (player.AttemptToPurchase(items[5]))
+                        graph.VerifyConditionsRelatedToItem(items[5], player.CountItemsOfType(items[5]));
+                }
+            }
+        }
+
+        void CheckForUpgradeInput(ConsoleKey inputReceived)
+        {
+            if (inputReceived == inputToPurchaseUpgrades[0])
+            {
+                if (graph.IsElementAvailableForPurchase(upgrades[0]))
+                    if (!upgrades[0].HasBeenPurchased)
+                        if (player.AttemptToPurchase(upgrades[0]))
+                            graph.VerifyConditionsRelatedToItem(upgrades[0], 1);
+            }
+            else if (inputReceived == inputToPurchaseUpgrades[1])
+            {
+                if (graph.IsElementAvailableForPurchase(upgrades[1]))
+                    if (!upgrades[0].HasBeenPurchased)
+                        if (player.AttemptToPurchase(upgrades[1]))
+                            graph.VerifyConditionsRelatedToItem(upgrades[1], 1);
+            }
+            else if (inputReceived == inputToPurchaseUpgrades[2])
+            {
+                if (graph.IsElementAvailableForPurchase(upgrades[2]))
+                    if (!upgrades[0].HasBeenPurchased)
+                        if (player.AttemptToPurchase(upgrades[2]))
+                            graph.VerifyConditionsRelatedToItem(upgrades[2], 1);
+            }
+            else if (inputReceived == inputToPurchaseUpgrades[3])
+            {
+                if (graph.IsElementAvailableForPurchase(upgrades[3]))
+                    if (!upgrades[0].HasBeenPurchased)
+                        if (player.AttemptToPurchase(upgrades[3]))
+                            graph.VerifyConditionsRelatedToItem(upgrades[3], 1);
             }
         }
 
