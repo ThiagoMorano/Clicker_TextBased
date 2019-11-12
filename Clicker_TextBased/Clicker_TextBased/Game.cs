@@ -51,18 +51,22 @@ namespace Clicker_TextBased
             graph.AddNode(items[1]);
 
             string[] descriptionItem2 = { "Use a RX modulator to conduct", "a mainframe cell direct to hack", "your hacking back in time" };
+            // Quote from Kung Fury (2015)
             items[2] = new Item(10, 1d, "Hack Time Loop", descriptionItem2);
             graph.AddNode(items[2]);
 
             string[] descriptionItem3 = { "Give the Red Pill and recruit", "another hacker for you cause" };
+            // References The Matrix (1999)
             items[3] = new Item(15, 1.5d, "The Red Pill", descriptionItem3);
             graph.AddNode(items[3]);
 
             string[] descriptionItem4 = { "Create a hack that is able to", "cut through any known Intrusion", "Countermeasures Electronics" };
+            // References ICE concept created by William Gibson
             items[4] = new Item(15, 1.5d, "ICE Breaker", descriptionItem4);
             graph.AddNode(items[4]);
 
-            string[] descriptionItem5 = { "\"Wintermute was hive mind, decision", "maker. Neuromancer was personality.", "Neuromancer was immortality\n" };
+            string[] descriptionItem5 = { "\"Wintermute was hive mind, decision", "maker. Neuromancer was personality.", "Neuromancer was immortality\"" };
+            // Quote from William Gibson's Neuromancer (1984)
             items[5] = new Item(15, 1.5d, "Allied AI", descriptionItem5);
             graph.AddNode(items[5]);
 
@@ -76,6 +80,7 @@ namespace Clicker_TextBased
             graph.AddNode(upgrades[1]);
 
             string[] descriptionUpgrade2 = { "Gain access to the Cyberspace.", "You and your allies are able to", "access its virtual physicality." };
+            // References the concept of Cyberspace created by William Gibson and popularized by many other
             upgrades[2] = new Upgrade(1.0d, items[3], 2.0f, "Enter the Matrix", descriptionUpgrade2);
             graph.AddNode(upgrades[2]);
 
