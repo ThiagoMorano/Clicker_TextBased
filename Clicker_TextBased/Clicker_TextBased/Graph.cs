@@ -9,12 +9,10 @@ namespace Clicker_TextBased
     public class Graph
     {
         Dictionary<Element, Node> _nodes;
-        List<Edge> _edges; // Should this be kept?
 
         public Graph()
         {
             _nodes = new Dictionary<Element, Node>();
-            _edges = new List<Edge>();
         }
 
         /// <summary>
@@ -66,7 +64,6 @@ namespace Clicker_TextBased
                 Edge edge = new Edge(_nodes[startElement], _nodes[endElement], amountRequiredInCondition);
                 _nodes[startElement].AddOutboundEdge(edge);
                 _nodes[endElement].AddInboundEdge(edge);
-                _edges.Add(edge);
             }
         }
 
@@ -141,7 +138,7 @@ namespace Clicker_TextBased
         }
 
         /// <summary>
-        /// Returns the outbound edge until a element. Returns null if no edge exists.
+        /// Returns the outbound edge until an element. Returns null if no edge exists.
         /// </summary>
         /// <param name="element"></param>
         /// <returns></returns>
