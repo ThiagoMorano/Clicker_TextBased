@@ -11,10 +11,12 @@ namespace Clicker_TextBased
     /// </summary>
     static class Graphics
     {
+        static int offsetX = 3;
+        static int offsetY = 0;
+
         public static void Draw(int x, int y, string graphics)
         {
-            int offsetX = 3;
-            int offsetY = 0;
+
             Console.SetCursorPosition(x + offsetX, y + offsetY);
             Console.Write(graphics);
         }

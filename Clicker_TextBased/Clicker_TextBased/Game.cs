@@ -59,17 +59,17 @@ namespace Clicker_TextBased
 
             string[] descriptionItem3 = { "Give the Red Pill and recruit", "another hacker for you cause" };
             // References The Matrix (1999)
-            items[3] = new Item(1500, 1.5d, "The Red Pill", descriptionItem3);
+            items[3] = new Item(1500d, 24d, "The Red Pill", descriptionItem3);
             graph.AddNode(items[3]);
 
             string[] descriptionItem4 = { "Create a hack that is able to", "cut through any known Intrusion", "Countermeasures Electronics" };
             // References ICE concept created by William Gibson
-            items[4] = new Item(15, 1.5d, "ICE Breaker", descriptionItem4);
+            items[4] = new Item(2000d, 35d, "ICE Breaker", descriptionItem4);
             graph.AddNode(items[4]);
 
             string[] descriptionItem5 = { "\"Wintermute was hive mind, decision", "maker. Neuromancer was personality.", "Neuromancer was immortality\"" };
             // Quote from William Gibson's Neuromancer (1984)
-            items[5] = new Item(15, 1.5d, "Allied AI", descriptionItem5);
+            items[5] = new Item(4096d, 128d, "Allied AI", descriptionItem5);
             graph.AddNode(items[5]);
 
             // Initialize upgrades
@@ -269,6 +269,8 @@ namespace Clicker_TextBased
 
             Graphics.Draw(49, 10, player.CurrentCurrencyValue.ToString("f1"));
             Graphics.Draw(49, 11, "Lines of ~hacking~ Code");
+            Graphics.Draw(49, 13, player.GetTotalGainAmount().ToString("f1"));
+            Graphics.Draw(49, 14, "Lines per Second");
         }
 
         private void DrawItems()

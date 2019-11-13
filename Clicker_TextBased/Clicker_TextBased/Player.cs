@@ -47,20 +47,21 @@ namespace Clicker_TextBased
         /// <param name="elapsedTime"></param>
         private void GenerateCurrencyFromItems(double elapsedTime)
         {
-            foreach (Item item in _inventory.Keys)
-            {
-                _currentCurrencyValue += GetGainOfItemsOfTypeInInventory(item) * elapsedTime;
-            }
+            _currentCurrencyValue += GetTotalGainAmount() * elapsedTime;
         }
 
         /// <summary>
-        /// Method added for the presentation
-        /// Adds specific amount of currency, just to allow all elements to be shown during the demo
+        /// Returns the total amount of currency generated per second
         /// </summary>
-        /// <param name="amountOfCurrency"></param>
-        public void DEMO_AddCurrency(double amountOfCurrency)
+        /// <returns></returns>
+        public double GetTotalGainAmount()
         {
-            _currentCurrencyValue += amountOfCurrency;
+            double gainAmount = 0.0d;
+            foreach (Item item in _inventory.Keys)
+            {
+                gainAmount += GetGainOfItemsOfTypeInInventory(item);
+            }
+            return gainAmount;
         }
 
         /// <summary>
@@ -158,6 +159,18 @@ namespace Clicker_TextBased
                 return _inventory[item];
             else
                 return 0;
+        }
+
+
+
+        /// <summary>
+        /// Method added for the presentation
+        /// Adds specific amount of currency, just to allow all elements to be shown during the demo
+        /// </summary>
+        /// <param name="amountOfCurrency"></param>
+        public void DEMO_AddCurrency(double amountOfCurrency)
+        {
+            _currentCurrencyValue += amountOfCurrency;
         }
     }
 }

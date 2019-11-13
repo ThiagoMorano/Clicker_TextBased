@@ -20,17 +20,17 @@ namespace Clicker_TextBased
             Console.WriteLine("The world needs to be hacked.");
             Console.WriteLine("Generates lines of code with [SpaceBar]");
             Console.WriteLine("Purchase items to help you with hacking the world.");
-            Console.WriteLine("Maximize your console's window for best hacking experience.");
+            Console.WriteLine("Keep your window maximized for best hacking experience.");
             Console.WriteLine("Good luck and happy hacking!");
             Console.WriteLine("Press any key to start...");
 
             Console.ReadKey(true);
-            
+
             MaximizeConsole();
 
-            Console.Clear();
+            Console.Clear();            
+            Console.CursorVisible = false;
 
-            
             Game game = new Game();
             game.Init();
 
