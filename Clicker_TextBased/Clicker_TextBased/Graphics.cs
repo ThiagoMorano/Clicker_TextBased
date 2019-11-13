@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Clicker_TextBased
 {
-    class Graphics
+    /// <summary>
+    /// Utility class used to draw on the console
+    /// </summary>
+    static class Graphics
     {
         public static void Draw(int x, int y, string graphics)
         {

@@ -46,7 +46,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="Graph.cs" />
     <Compile Include="Graphics.cs" />
-    <Compile Include="Item.cs" />
+    <Compile Include="Elements.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

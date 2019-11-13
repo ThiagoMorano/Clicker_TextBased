@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Clicker_TextBased
 {
+
+    /// <summary>
+    /// In-game elements that can be purchased by the player
+    /// </summary>
     public class Element
     {
         protected double _cost;
@@ -17,6 +21,9 @@ namespace Clicker_TextBased
         public string[] Description { get { return _description; } }
     }
 
+    /// <summary>
+    /// Elements that generate currency over time
+    /// </summary>
     public class Item : Element
     {
         double _itemGainPerSecond;
@@ -45,6 +52,9 @@ namespace Clicker_TextBased
         }
     }
 
+    /// <summary>
+    /// Elements that influence the production over time of items
+    /// </summary>
     public class Upgrade : Element
     {
 

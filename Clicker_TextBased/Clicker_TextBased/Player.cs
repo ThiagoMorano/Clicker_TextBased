@@ -63,6 +63,11 @@ namespace Clicker_TextBased
             _currentCurrencyValue += amountOfCurrency;
         }
 
+        /// <summary>
+        /// Returns the gain value of a specific type of items
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public double GetGainOfItemsOfTypeInInventory(Item item)
         {
             if (_inventory.ContainsKey(item))
@@ -76,7 +81,11 @@ namespace Clicker_TextBased
             }
         }
 
-
+        /// <summary>
+        /// Returns the gain value of one item of the type. Influenced by upgrades
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public double GetGainOfSingleItem(Item item)
         {
             if (_itemGainMultiplier.ContainsKey(item))
@@ -90,7 +99,7 @@ namespace Clicker_TextBased
         }
 
         /// <summary>
-        /// Purchase the element if player has enough currency 
+        /// Purchases the element if player has enough currency 
         /// </summary>
         /// <param name="element"></param>
         public bool AttemptToPurchase(Element element)

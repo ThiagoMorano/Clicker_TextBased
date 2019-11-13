@@ -103,7 +103,6 @@ namespace Clicker_TextBased
         public void Update()
         {
             CheckInput();
-
             player.Update();
         }
 
@@ -242,7 +241,7 @@ namespace Clicker_TextBased
             win = true;
             exit = true;
             Console.Clear();
-            Graphics.Draw(49, 10, "YoU HaVe hAcKeD tHe WoRlD!");
+            Graphics.Draw(49, 10, "YoU hAvE hAcKeD tHe WoRlD!");
         }
 
         public void Draw()
