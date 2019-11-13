@@ -48,7 +48,7 @@ namespace Clicker_TextBased
             items[0] = new Item(1.0d, 0.1d, "Robot Arm", descriptionItem0);
             graph.AddNode(items[0]);
 
-            string[] descriptionItem1 = { "Leave a trojan process in", "a random PC that keeps hacking", "while it rests" };
+            string[] descriptionItem1 = { "Leave a trojan process in", "a random PC that keeps hacking", "in the background" };
             items[1] = new Item(100d, 0.5d, "Zombie PC", descriptionItem1);
             graph.AddNode(items[1]);
 
@@ -77,7 +77,7 @@ namespace Clicker_TextBased
             upgrades[0] = new Upgrade(200d, items[0], 2.0f, "Keyboard Gloves", descriptionUpgrade0);
             graph.AddNode(upgrades[0]);
 
-            string[] descriptionUpgrade1 = { "Your trojan disguises itself as", "pretty screensavers. People are", "more prone to leave it running" };
+            string[] descriptionUpgrade1 = { "Your trojans disguise themselves as", "pretty screensavers. People are", "more prone to leave them running" };
             upgrades[1] = new Upgrade(1000d, items[1], 2.0f, "Nice Screensaver", descriptionUpgrade1);
             graph.AddNode(upgrades[1]);
 

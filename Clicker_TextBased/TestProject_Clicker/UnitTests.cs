@@ -13,7 +13,7 @@ namespace TestProject_Clicker
     public class Graph_Tests
     {
         [TestMethod]
-        public void GetNodeThatContainsElement_NodeNotYetAdded()
+        public void Graph_GetNodeThatContainsElement_NodeNotYetAdded()
         {
             Graph graph = new Graph();
             Item item0 = new Item();
@@ -22,7 +22,7 @@ namespace TestProject_Clicker
         }
 
         [TestMethod]
-        public void AddNode_InsertionOfNodeByElement()
+        public void Graph_AddNode_InsertionOfNodeByElement()
         {
             Graph graph = new Graph();
             Item item0 = new Item();
@@ -34,7 +34,7 @@ namespace TestProject_Clicker
         }
 
         [TestMethod]
-        public void AddNode_NodesOfDifferentElementsAreDifferent()
+        public void Graph_AddNode_NodesOfDifferentElementsAreDifferent()
         {
             Graph graph = new Graph();
             Item item0 = new Item();
@@ -49,7 +49,7 @@ namespace TestProject_Clicker
         }
 
         [TestMethod]
-        public void AddNode_NodeOfElementAlreadyExists()
+        public void Graph_AddNode_NodeOfElementAlreadyExists()
         {
             Graph graph = new Graph();
             Item item0 = new Item();
@@ -60,7 +60,7 @@ namespace TestProject_Clicker
         }
 
         [TestMethod]
-        public void AddNode_ElementNull()
+        public void Graph_AddNode_ElementNull()
         {
             Graph graph = new Graph();
 
@@ -69,7 +69,7 @@ namespace TestProject_Clicker
 
 
         [TestMethod]
-        public void AddNode_and_AddEdge_FromElements()
+        public void Graph_AddNode_and_AddEdge_FromElements()
         {
             Graph graph = new Graph();
             Item item0 = new Item();
@@ -84,7 +84,7 @@ namespace TestProject_Clicker
         }
 
         [TestMethod]
-        public void AddEdgeFromToElement_AddConditionBetweenNodes()
+        public void Graph_AddEdgeFromToElement_AddConditionBetweenNodes()
         {
             Graph graph = new Graph();
             Item item0 = new Item();
@@ -98,7 +98,7 @@ namespace TestProject_Clicker
         }
 
         [TestMethod]
-        public void VerifyCondition_ConditionShouldBeMet()
+        public void Graph_VerifyCondition_ConditionShouldBeMet()
         {
             Graph graph = new Graph();
             Item item0 = new Item();
@@ -114,7 +114,7 @@ namespace TestProject_Clicker
         }
 
         [TestMethod]
-        public void VerifyCondition_ConditionNotYetMet()
+        public void Graph_VerifyCondition_ConditionNotYetMet()
         {
             Graph graph = new Graph();
             Item item0 = new Item();
@@ -131,7 +131,7 @@ namespace TestProject_Clicker
         }
 
         [TestMethod]
-        public void VerifyCondition_MultipleConditionsPartiallyMet()
+        public void Graph_VerifyCondition_MultipleConditionsPartiallyMet()
         {
             Graph graph = new Graph();
             Item preconditionalItem0 = new Item(1.0d, 1.0d);
@@ -151,7 +151,7 @@ namespace TestProject_Clicker
         }
 
         [TestMethod]
-        public void VerifyCondition_MultipleConditionsShouldBeFulfilled()
+        public void Graph_VerifyCondition_MultipleConditionsShouldBeFulfilled()
         {
             Graph graph = new Graph();
             Item preconditionalItem0 = new Item(1.0d, 1.0d);
@@ -211,7 +211,7 @@ namespace TestProject_Clicker
     public class Player_Tests
     {
         [TestMethod]
-        public void PlayerConstructorWithValues_ProperlySetClickingValue()
+        public void Player_ConstructorWithValues_ProperlySetClickingValue()
         {
             double valueGeneratedByClicking = 1;
             Player player = new Player(valueGeneratedByClicking);
@@ -220,7 +220,7 @@ namespace TestProject_Clicker
         }
 
         [TestMethod]
-        public void PlayerClick_ProducesCorrectAmountOfCurrency()
+        public void Player_Click_ProducesCorrectAmountOfCurrency()
         {
             double valueFromClicking = 1;
             Player player = new Player(valueFromClicking);

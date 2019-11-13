@@ -18,7 +18,7 @@ namespace Clicker_TextBased
             Console.CursorVisible = false;
 
             Console.WriteLine("The world needs to be hacked.");
-            Console.WriteLine("Generates lines of code with [SpaceBar]");
+            Console.WriteLine("Generate lines of code with [SpaceBar]");
             Console.WriteLine("Purchase items to help you with hacking the world.");
             Console.WriteLine("Keep your window maximized for best hacking experience.");
             Console.WriteLine("Good luck and happy hacking!");
