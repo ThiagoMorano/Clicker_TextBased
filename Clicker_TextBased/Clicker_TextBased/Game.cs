@@ -49,17 +49,17 @@ namespace Clicker_TextBased
             graph.AddNode(items[0]);
 
             string[] descriptionItem1 = { "Leave a trojan process in", "a random PC that keeps hacking", "while it rests" };
-            items[1] = new Item(5, 0.5d, "Zombie PC", descriptionItem1);
+            items[1] = new Item(100d, 0.5d, "Zombie PC", descriptionItem1);
             graph.AddNode(items[1]);
 
             string[] descriptionItem2 = { "Use a RX modulator to conduct", "a mainframe cell direct to hack", "your hacking back in time" };
             // Quote from Kung Fury (2015)
-            items[2] = new Item(10, 1d, "Hack Time Loop", descriptionItem2);
+            items[2] = new Item(300d, 5d, "Time Loop", descriptionItem2);
             graph.AddNode(items[2]);
 
             string[] descriptionItem3 = { "Give the Red Pill and recruit", "another hacker for you cause" };
             // References The Matrix (1999)
-            items[3] = new Item(15, 1.5d, "The Red Pill", descriptionItem3);
+            items[3] = new Item(1500, 1.5d, "The Red Pill", descriptionItem3);
             graph.AddNode(items[3]);
 
             string[] descriptionItem4 = { "Create a hack that is able to", "cut through any known Intrusion", "Countermeasures Electronics" };
@@ -74,30 +74,47 @@ namespace Clicker_TextBased
 
             // Initialize upgrades
             string[] descriptionUpgrade0 = { "Give keyboard gloves to your", "robot arms. It keeps them cozy", "and helps with typing" };
-            upgrades[0] = new Upgrade(1.0d, items[1], 2.0f, "Keyboard Gloves", descriptionUpgrade0);
+            upgrades[0] = new Upgrade(200d, items[0], 2.0f, "Keyboard Gloves", descriptionUpgrade0);
             graph.AddNode(upgrades[0]);
 
             string[] descriptionUpgrade1 = { "Your trojan disguises itself as", "pretty screensavers. People are", "more prone to leave it running" };
-            upgrades[1] = new Upgrade(1.0d, items[2], 2.0f, "Nice Screensaver", descriptionUpgrade1);
+            upgrades[1] = new Upgrade(1000d, items[1], 2.0f, "Nice Screensaver", descriptionUpgrade1);
             graph.AddNode(upgrades[1]);
 
             string[] descriptionUpgrade2 = { "Gain access to the Cyberspace.", "You and your allies are able to", "access its virtual physicality." };
             // References the concept of Cyberspace created by William Gibson and popularized by many other
-            upgrades[2] = new Upgrade(1.0d, items[3], 2.0f, "Enter the Matrix", descriptionUpgrade2);
+            upgrades[2] = new Upgrade(3000d, "Enter the Matrix", descriptionUpgrade2);
+            Item[] influencedItems = { items[2], items[3] };
+            float[] multipliers = { 2.0f, 2.0f };
+            upgrades[2].AddInfluencedItem(influencedItems, multipliers);
             graph.AddNode(upgrades[2]);
 
             string[] descriptionUpgrade3 = { "Finish what you've started and", "HACK THE WORLD!" };
-            upgrades[3] = new Upgrade(1.0d, "Hack the World!", descriptionUpgrade3);
+            upgrades[3] = new Upgrade(4096d, "Hack the World!", descriptionUpgrade3);
             graph.AddNode(upgrades[3]);
 
 
             //Initialize dependencies
-            //graph.AddEdgeFromToElement(items[3], upgrades[2], 1);
-            //graph.AddEdgeFromToElement(upgrades[2], items[4], 1);
-            //graph.AddEdgeFromToElement(upgrades[2], items[5], 1);
+            graph.AddEdgeFromToElement(items[0], upgrades[0], 10);
+            graph.AddEdgeFromToElement(items[0], items[1], 1);
 
-            //graph.AddEdgeFromToElement(upgrades[2], upgrades[3], 1);
+            graph.AddEdgeFromToElement(items[1], upgrades[1], 5);
+            graph.AddEdgeFromToElement(items[1], items[2], 1);
 
+            graph.AddEdgeFromToElement(items[2], items[3], 1);
+
+            graph.AddEdgeFromToElement(items[2], upgrades[2], 20);
+            graph.AddEdgeFromToElement(items[3], upgrades[2], 5);
+
+
+            graph.AddEdgeFromToElement(upgrades[2], items[4], 1);
+            graph.AddEdgeFromToElement(upgrades[2], items[5], 1);
+
+            graph.AddEdgeFromToElement(items[3], items[4], 1);
+
+            graph.AddEdgeFromToElement(items[4], items[5], 1);
+
+            graph.AddEdgeFromToElement(items[5], upgrades[3], 2);
         }
 
         public void Update()
@@ -211,21 +228,21 @@ namespace Clicker_TextBased
             else if (inputReceived == inputToPurchaseUpgrades[1])
             {
                 if (graph.IsElementAvailableForPurchase(upgrades[1]))
-                    if (!upgrades[0].HasBeenPurchased)
+                    if (!upgrades[1].HasBeenPurchased)
                         if (player.AttemptToPurchase(upgrades[1]))
                             graph.VerifyConditionsRelatedToItem(upgrades[1], 1);
             }
             else if (inputReceived == inputToPurchaseUpgrades[2])
             {
                 if (graph.IsElementAvailableForPurchase(upgrades[2]))
-                    if (!upgrades[0].HasBeenPurchased)
+                    if (!upgrades[2].HasBeenPurchased)
                         if (player.AttemptToPurchase(upgrades[2]))
                             graph.VerifyConditionsRelatedToItem(upgrades[2], 1);
             }
             else if (inputReceived == inputToPurchaseUpgrades[3])
             {
                 if (graph.IsElementAvailableForPurchase(upgrades[3]))
-                    if (!upgrades[0].HasBeenPurchased)
+                    if (!upgrades[3].HasBeenPurchased)
                         if (player.AttemptToPurchase(upgrades[3]))
                         {
                             graph.VerifyConditionsRelatedToItem(upgrades[3], 1);

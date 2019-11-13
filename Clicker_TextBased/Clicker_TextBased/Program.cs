@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+
 
 namespace Clicker_TextBased
 {
@@ -22,10 +25,12 @@ namespace Clicker_TextBased
             Console.WriteLine("Press any key to start...");
 
             Console.ReadKey(true);
+            
+            MaximizeConsole();
 
             Console.Clear();
 
-
+            
             Game game = new Game();
             game.Init();
 
@@ -53,5 +58,16 @@ namespace Clicker_TextBased
             Graphics.Draw(89, 35, "Press any key to exit...");
             Console.ReadKey();
         }
+
+        //Snippet taken from https://stackoverflow.com/questions/22053112/maximizing-console-window-c-sharp/22053200
+        [DllImport("user32.dll")]
+        public static extern bool ShowWindow(System.IntPtr hWnd, int cmdShow);
+
+        private static void MaximizeConsole()
+        {
+            Process p = Process.GetCurrentProcess();
+            ShowWindow(p.MainWindowHandle, 3);
+        }
+        // end of snippet
     }
 }
